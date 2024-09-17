@@ -4,11 +4,11 @@ at the farmer’s market by counting the vendor booth assignments per vendor_id.
 
 SELECT 
 	vendor_id, 
-	COUNT(*) AS rentals_count
+	COUNT(*) AS rentals_count -- add/display a new column name "rentals_count" where it shows the count of vendor_id
 FROM 
-	vendor_booth_assignments
+	vendor_booth_assignments 
 GROUP BY 
-	vendor_id;
+	vendor_id; -- group the counts by vendor 
 		
 
 /* 2. The Farmer’s Market Customer Appreciation Committee wants to give a bumper 
@@ -24,20 +24,22 @@ SELECT
 	--customer_purchases.customer_id, --> for double-checking purposes 
 	--customer_purchases.quantity, --> for double-checking purposes 
 	--customer_purchases.cost_to_customer_per_qty, --> for double-checking purposes 
-	SUM (customer_purchases.quantity * customer_purchases.cost_to_customer_per_qty) AS total_spend -- the WHERE clause cannot be used with aggregate functions like SUM(), COUNT(), AVG(). We need to use HAVING clause here. 
+	SUM (customer_purchases.quantity * customer_purchases.cost_to_customer_per_qty) AS total_spend 
+	-- Set the calculation: total spend = quantity purchased x cost
+	-- Add/display a new column name "total_spend", with the result of the above calculation
+	-- Note: the WHERE clause cannot be used with aggregate functions like SUM(), COUNT(), AVG(). We need to use HAVING clause here. 
 FROM 
 	customer
-INNER JOIN 
-	customer_purchases -- since we only want the customers with total spent >$2000 
-		ON 
-		customer.customer_id = customer_purchases.customer_id
+	INNER JOIN -- INNER JOIN tables "customer" and "customer purcases" because we only want to see the customers with total spent >$2000 
+		customer_purchases 
+		ON customer.customer_id = customer_purchases.customer_id
 GROUP BY 
-	customer_purchases.customer_id -- alternatively: customer.customer_id 
+	customer_purchases.customer_id -- group the total spends by customer 
 HAVING
-	total_spend > 2000
+	total_spend > 2000 -- only show customers whose total spends are more than $2,000. 
 ORDER BY 
-	customer.customer_last_name,
-	customer.customer_first_name;
+	customer.customer_last_name, -- sort by customers' last names 
+	customer.customer_first_name; -- and then sort by customers' first names
 	
 		
 
@@ -53,18 +55,21 @@ When inserting the new vendor, you need to appropriately align the columns to be
 VALUES(col1,col2,col3,col4,col5) 
 */
 
+-- code to delete my previously created same-name tables
+DROP TABLE IF EXISTS new_vendor 
+
+-- create a temporary table name "new_vendor" 
 CREATE TEMP TABLE new_vendor AS 
 SELECT * 
 FROM vendor;
 
-
+-- insert a new row for the 10th vendor, with details inserted into appropriate columns 
 INSERT INTO temp.new_vendor (vendor_id, vendor_name, vendor_type, vendor_owner_first_name, vendor_owner_last_name)
 VALUES (10, 'Thomass Superfood Store', 'Fresh Focused', 'Thomas', 'Rosenthal');
 
-
+-- display the output  
 SELECT * FROM new_vendor;
 
--- DROP TABLE IF EXISTS new_vendor --> code to delete my previously created tables
 
 
 -- Date
@@ -75,8 +80,8 @@ and year are! */
 
 SELECT 
     customer_id, 
-    strftime('%m', market_date) AS month, 
-    strftime('%Y', market_date) AS year
+    strftime('%m', market_date) AS month, -- extract the "month" element in column "market_date" and put in a new column name "month"
+    strftime('%Y', market_date) AS year -- extract the "year" element in column "market_date" and put in a new column name "month"
 FROM 
     customer_purchases;
 
@@ -89,13 +94,15 @@ HINTS: you will need to AGGREGATE, GROUP BY, and filter...
 but remember, STRFTIME returns a STRING for your WHERE statement!! */
 
 SELECT 
-    customer_id, 
-	strftime('%m', market_date) AS month,
-	strftime('%Y', market_date) AS year,
-	SUM(quantity * cost_to_customer_per_qty) AS total_spend -- AGGREGATE clause
+    	customer_id, 
+	strftime('%m', market_date) AS month, -- extract the "month" element in column "market_date" and put in a new column name "month"
+	strftime('%Y', market_date) AS year,-- extract the "year" element in column "market_date" and put in a new column name "year"
+	SUM(quantity * cost_to_customer_per_qty) AS total_spend
+	-- Set calculation: total spend = quantity x cost 
+	-- Add/display its results in a new column name "total_spend" 
 FROM 
     customer_purchases
 WHERE 
-	strftime('%m', market_date) = '04' AND strftime('%Y', market_date) = '2022'
+	strftime('%m', market_date) = '04' AND strftime('%Y', market_date) = '2022' -- filter to only April 2022 
 GROUP BY 
-    customer_id;
+    customer_id; -- group total spends by customer 
