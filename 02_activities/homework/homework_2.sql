@@ -1,15 +1,15 @@
 --SELECT
 /* 1. Write a query that returns everything in the customer table. */
-SELECT * 
-FROM customer;
+SELECT * -- display all columns
+FROM customer; 
 
 
 /* 2. Write a query that displays all of the columns and 10 rows from the cus- tomer table, 
 sorted by customer_last_name, then customer_first_ name. */
 SELECT * 
 FROM customer 
-ORDER BY customer_last_name, customer_first_name
-LIMIT 10;
+ORDER BY customer_last_name, customer_first_name -- sort by last name, then first name 
+LIMIT 10; -- limit to 10 rows 
 
 
 --WHERE
@@ -18,8 +18,8 @@ LIMIT 10;
 SELECT * 
 FROM customer_purchases
 WHERE 
-	product_id = 4 
-	or product_id = 5
+	product_id = 4 -- filter to product id = 4 
+	or product_id = 5 -- or product id = 5  
 	or product_id = 6
 	or product_id = 7
 	or product_id = 8
@@ -29,13 +29,13 @@ WHERE
 -- option 2
 SELECT * 
 FROM customer_purchases
-WHERE product_id IN (4,5,6,7,8,9);
+WHERE product_id IN (4,5,6,7,8,9); -- filter to product id between 4 and 9 
 
 
 -- Personal note: option 3 
 SELECT * 
 FROM customer_purchases
-WHERE product_id BETWEEN 4 AND 9;
+WHERE product_id BETWEEN 4 AND 9; -- filter to product id between 4 and 9 
 
 
 
@@ -46,16 +46,16 @@ filtered by vendor IDs between 8 and 10 (inclusive) using either:
 */
 -- option 1
 SELECT 
-	*, 
-	quantity * cost_to_customer_per_qty AS price
+	*, -- display all columns 
+	quantity * cost_to_customer_per_qty AS price -- add & display a new column name "price" where: price = qty * cost 
 FROM customer_purchases 
-WHERE vendor_id >= 8 AND vendor_id <=10;
+WHERE vendor_id >= 8 AND vendor_id <=10; -- filter to vendor id between 8 and 10 (both inclusive) 
 
 
 -- option 2
 SELECT 
 	*, 
-	quantity * cost_to_customer_per_qty AS price
+	quantity * cost_to_customer_per_qty AS price 
 FROM customer_purchases 
 WHERE vendor_id BETWEEN 8 AND 10;
 
@@ -70,12 +70,10 @@ if the product_qty_type is “unit,” and otherwise displays the word “bulk.�
 SELECT 
     product_id, 
     product_name, 
-    
-	CASE 
-        WHEN product_qty_type = 'unit' THEN 'unit'
-        ELSE 'bulk'
-    END AS prod_qty_type_condensed
-    
+    	CASE -- add/display a new column, with if/then statement  
+        	WHEN product_qty_type = 'unit' THEN 'unit' -- if type is 'unit' then input 'input' as value
+        	ELSE 'bulk' -- otherwise, input 'bulk' as value 
+    	END AS prod_qty_type_condensed -- name this new column name "prod_qty_type_condensed"
 FROM 
     product;
 
@@ -88,17 +86,14 @@ contains the word “pepper” (regardless of capitalization), and otherwise out
 SELECT 
     product_id, 
     product_name, 
-    
-	CASE 
+CASE -- add/display a new column, with if/then statement 
         WHEN product_qty_type = 'unit' THEN 'unit'
         ELSE 'bulk'
-    END AS prod_qty_type_condensed,
-	
-	CASE 
-       WHEN LOWER(product_name) LIKE '%pepper%' THEN 1
-       ELSE 0
-    END AS pepper_flag
-    
+   	END AS prod_qty_type_condensed, -- name of new column, AND 
+CASE -- add/display a new column, with if/then statement 
+       WHEN LOWER(product_name) LIKE '%pepper%' THEN 1 -- if find text "pepper" in value, then return 1
+       ELSE 0 -- otherwise return 0
+    	END AS pepper_flag -- name of new column
 FROM 
     product;
 
@@ -109,16 +104,16 @@ FROM
 vendor_id field they both have in common, and sorts the result by vendor_name, then market_date. */
 
 SELECT 
-	vendor.*, -- alternatively: v.*
-	vendor_booth_assignments.* -- alternatively: vba.*
+	vendor.*, -- display all columns in table vendor 
+	vendor_booth_assignments.* --  display all columns in table vendor_booth_assignments
 
-FROM vendor -- alternatively: vendor as v 
+FROM vendor -- INNER JOIN clause to join tables vendor & vendor_booth_assignments
 	INNER JOIN 
-		vendor_booth_assignments -- alternatively: vendor_booth_assignments as vba
+		vendor_booth_assignments 
 		ON
-		vendor.vendor_id = vendor_booth_assignments.vendor_id --  alternatively: v.vendor_id = vba.vendor_id
+		vendor.vendor_id = vendor_booth_assignments.vendor_id  
 	
-ORDER BY 
-	vendor.vendor_name, -- alternatively: v.vendor_name
-	vendor_booth_assignments.market_date; -- alternatively: vba.market_date
+ORDER BY -- sorting by vendor name, followed by market date 
+	vendor.vendor_name,  
+	vendor_booth_assignments.market_date;  
 	
