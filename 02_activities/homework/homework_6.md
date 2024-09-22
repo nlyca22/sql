@@ -9,7 +9,7 @@
 
 ** PLEASE SEE MY ANSWER BELOW: 
 
-My past positions were neither Data Scientist or Machine Learning Engineer, nor were they related to data architecture design or software development… So I don’t have direct working experience to reflect on what I should have done differently. Instead, my answer will be based on a project I led, which involved improving a system designed by others. 
+My past positions were neither Data Scientist nor Machine Learning Engineer, nor were they related to data architecture design or software development… So I don’t have direct working experience to reflect on what I should have done differently. Instead, my answer will be based on a project I led, which involved improving a system designed by others. 
 
 In 2012, while working at a global American bank in Vietnam, I led a process-improvement initiative on built-in fraud algorithms. Due to company policy, I cannot reveal specific details about how they screen frauds, so I will share my experience at high-level concept. 
 
