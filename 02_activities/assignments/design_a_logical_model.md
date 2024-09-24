@@ -54,7 +54,7 @@ Table stucture:
 
 Privacy implication:
 It is less privacy-sensitive than type 2 (below) because it stores less customer's personal data (only the current address is kept). 
-Compliance with data protection laws and regulations (such as GDPR) would require explicit customer's consent as well as secure handling of data retention, restriction of access, encryption, and deletion.
+Safeguard measures like restricting access, encryption, and customer's consent must be in-place. 
 
 
 2) Option 2: Architecture for RETAINING customers' addresses - Type 2 Slowly Changing Dimension (SCD):
@@ -71,7 +71,8 @@ Table stucture:
 
 Privacy implication:
 It is more privacy-sensitive than type 1 (above) because it stores more customer's personal data info (ie. history of addresses). 
-Compliance with data protection laws and regulations (such as GDPR) would require explicit customer's consent as well as secure handling of data retention, restriction of access, encryption, and deletion. In addition, due to more risks involved, the business should consider the necessity of storing historical records of customers' personal data from business and legal standpoint.
+Compliance with data protection laws and regulations (such as GDPR) are a must, which include customer's explicit consent, secure handling of data retention, access restriction, encryption, and deletion. 
+Due to more risks involved, the business should consider the necessity of storing historical records of customers' personal data from business and legal standpoint.
 
 
 ```
