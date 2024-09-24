@@ -88,8 +88,8 @@ Some of the differences I have observed are:
 - Visual design: The AdventureWorks Schema is more visually appealing and easier to read, thanks to color coding, and segmenting for different departments.
 - Complexity - Breadth (has more departments): The AdventureWorks Schema covers more deparments - such as Purchasing, Production, and dbo. 
 - Complexity - Depth (has more details): The AdventureWorks Schema has more tables and details - e.g., their Sales ERDs tracks Currency Rates and Customer's Credit Cards as well. 
-- Some lack of tables: I include RECEIPT table - for external issuance to clients, and for easy internal retrieval.
-- Others: I have a simple DATE table, theirs is more complicated with various financial timeline reporting. 
+- What AdventureWork Schema does not have, but my bookstore ERD have: my bookstore ERD has a RECEIPT table - for external issuance to clients, and for easy internal retrieval.
+- DATE table for reporting purposes: my bookstore ERD has a simple DATE table because the hypothetical bookstore owner likely will outsource accounting/financial/tax reporting to a 3rd party professional service (e.g., H&R Block), whereas the AdventureSchema has various financial terminologies for financial reporting - most probably because they have an in-house accountant/financial analyst. 
 
 
 Would I change anything in mine?
