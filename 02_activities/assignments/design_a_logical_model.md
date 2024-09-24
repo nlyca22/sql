@@ -82,7 +82,21 @@ Review the AdventureWorks Schema [here](https://i.stack.imgur.com/LMu4W.gif)
 
 Highlight at least two differences between it and your ERD. Would you change anything in yours?
 ```
-Your answer...
+MY SUBMISSION:
+
+Some of the differences I have observed are:
+- Visual design: The AdventureWorks Schema is more visually appealing and easier to read, thanks to color coding, and segmenting for different departments.
+- Complexity - Breadth (has more departments): The AdventureWorks Schema covers more deparments - such as Purchasing, Production, and dbo. 
+- Complexity - Depth (has more details): The AdventureWorks Schema has more tables and details - e.g., their Sales ERDs tracks Currency Rates and Customer's Credit Cards as well. 
+- Some lack of tables: I include RECEIPT table - for external issuance to clients, and for easy internal retrieval.
+- Others: I have a simple DATE table, theirs is more complicated with various financial timeline reporting. 
+
+
+Would I change anything in mine?
+Yes, I would 'beautify' the design - segment it to departments, and use color coding.
+I would store Credit Cards, Currency Rates, Login Id and Passwords as well - for customer's convenience and easy troubleshooting. 
+And as my hypothetical small bookstore evolves with time, I would evolve my ERD as well. 
+
 ```
 
 # Criteria
@@ -103,9 +117,9 @@ Your answer...
     * Open a private window in your browser. Copy and paste the link to your pull request into the address bar. Make sure you can see your pull request properly. This helps the technical facilitator and learning support staff review your submission easily.
 
 Checklist:
-- [ ] Create a branch called `model-design`.
-- [ ] Ensure that the repository is public.
-- [ ] Review [the PR description guidelines](https://github.com/UofT-DSI/onboarding/blob/main/onboarding_documents/submissions.md#guidelines-for-pull-request-descriptions) and adhere to them.
-- [ ] Verify that the link is accessible in a private browser window.
+- [X] Create a branch called `model-design`.
+- [X] Ensure that the repository is public.
+- [X] Review [the PR description guidelines](https://github.com/UofT-DSI/onboarding/blob/main/onboarding_documents/submissions.md#guidelines-for-pull-request-descriptions) and adhere to them.
+- [X] Verify that the link is accessible in a private browser window.
 
 If you encounter any difficulties or have questions, please don't hesitate to reach out to our team via our Slack at `#cohort-4-help`. Our Technical Facilitators and Learning Support staff are here to help you navigate any challenges.
