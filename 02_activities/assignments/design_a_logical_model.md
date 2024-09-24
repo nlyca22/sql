@@ -17,6 +17,8 @@ MY SUBMISSION:
         - All tables are for internal usage purposes (reporting, data analytics, marketing, machine learning/recommendation system), except for the "receipt" table that is for external issuance to customers. 
         - I separated "book" table from "other items" table for easy inventory management. 
         - I included "display location" table - for internal monitoring to see if there's any correlation with sales performance.
+        - "address" column means full address, including: unit/house number, street number, street name, city, province, postal code, country. 
+
 ```
    
 
@@ -39,7 +41,39 @@ _Hint, search type 1 vs type 2 slowly changing dimensions._
 
 Bonus: Are there privacy implications to this, why or why not?
 ```
-Your answer...
+MY SUBMISSION:
+
+1) Option 1: Architecture for OVERWRITING customers' addresses - Type 1 Slowly Changing Dimension (SCD):
+The CUSTOMER_ADRESS table only stores the most recent address, overwriting the previous address. It does not keep any history of old addresses.  
+When the address changes, only the "date_updated" is modified.  
+
+Table stucture:
+     - customer_id (FK)
+     - address (full address, including: unit/house number, street number, street name, city, province, postal code, country)
+     - date_updated
+
+Privacy implication:
+It is less privacy-sensitive than type 2 (below) because it stores less customer's personal data (only the current address is kept). 
+Compliance with data protection laws and regulations (such as GDPR) would require explicit customer's consent as well as secure handling of data retention, restriction of access, encryption, and deletion.
+
+
+2) Option 2: Architecture for RETAINING customers' addresses - Type 2 Slowly Changing Dimension (SCD):
+The CUSTOMER_ADRESS table preserves records of all previous addresses, and stores each address as a separate record with "effective start dates" and "effective end dates". 
+Whenever an address changes, a new row is inserted (aka created), with the "effective_end_date" and "is_current" fields updated accordingly. 
+
+Table stucture:
+     - customer_id (FK)
+     - address_id (auto-incremented) (PK) 
+     - address (full address, including: unit/house number, street number, street name, city, province, postal code, country)
+     - effective_start_date (when the address becomes effective)
+     - effective_end_date (when the address is no longer valid)
+     - is_current (yes/no flag)  
+
+Privacy implication:
+It is more privacy-sensitive than type 1 (above) because it stores more customer's personal data info (ie. history of addresses). 
+Compliance with data protection laws and regulations (such as GDPR) would require explicit customer's consent as well as secure handling of data retention, restriction of access, encryption, and deletion. In addition, due to more risks involved, the business should consider the necessity of storing historical records of customers' personal data from business and legal standpoint.
+
+
 ```
 
 ## Question 4
