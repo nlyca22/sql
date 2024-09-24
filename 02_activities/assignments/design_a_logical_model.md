@@ -5,8 +5,32 @@ Create a logical model for a small bookstore. 📚
 
 At the minimum it should have employee, order, sales, customer, and book entities (tables). Determine sensible column and table design based on what you know about these concepts. Keep it simple, but work out sensible relationships to keep tables reasonably sized. Include a date table. There are several tools online you can use, I'd recommend [_Draw.io_](https://www.drawio.com/) or [_LucidChart_](https://www.lucidchart.com/pages/).
 
+```
+MY SUBMISSION: 
+     1) File "Bookstore ERD(Q1) submission.drawio.pdf" 
+     2) Some explanation for the ERD: 
+        - The design is for a small bookstore with presence online (ie. website, Amazon) and offline (physical store). 
+        - Customers have the option of providing more personal info (e.g., date of birth) to receive anniversary and special occasion gifts (e.g., birthday gifts, christmas gifts). 
+        - To make an online purchase, customers are required to create an account. Note: I considered an option for customers to purchase as "guest", but I decided to require an account at this stage. 
+        - Membership is optional for customers. 
+        - Promotion codes are unique every time and are at items-level. Note: I considered to have promotions at both items-level and at basket-level, but decided to simplify it to just items-level, since a promotion code can apply to as many items as we want however we want. 
+        - All tables are for internal usage purposes (reporting, data analytics, marketing, machine learning/recommendation system), except for the "receipt" table that is for external issuance to customers. 
+        - I separated "book" table from "other items" table for easy inventory management. 
+        - I included "display location" table - for internal monitoring to see if there's any correlation with sales performance.
+```
+   
+
 ## Question 2
 We want to create employee shifts, splitting up the day into morning and evening. Add this to the ERD.
+
+```
+MY SUBMISSION: 
+     1) File "Bookstore ERD(Q2) submission.drawio.pdf" 
+     2) Some explanation for the ERD: 
+        - I added "Shift" table. 
+        - I included "shift id" in "Order" table and "Sales" table - for analytics purposes such as optimal staff allocations during busier shifts. 
+```
+         
 
 ## Question 3
 The store wants to keep customer addresses. Propose two architectures for the CUSTOMER_ADDRESS table, one that will retain changes, and another that will overwrite. Which is type 1, which is type 2?
